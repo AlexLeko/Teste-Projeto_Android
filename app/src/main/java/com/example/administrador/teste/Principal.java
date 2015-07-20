@@ -7,9 +7,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Principal extends AppCompatActivity {
 
@@ -18,22 +23,25 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        Button entrar = (Button)findViewById(R.id.entrar);
-        final EditText nome = (EditText)findViewById(R.id.nome);
+        ArrayList<String> clientsNames = new ArrayList<>();
 
-        nome.setText("");
+        clientsNames.add("Testildo");
+        clientsNames.add("Testario");
+        clientsNames.add("Testaria");
+        clientsNames.add("Testin");
 
-        entrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Principal.this, "Mensagem",Toast.LENGTH_LONG).show();
-            }
-        });
+        ListView listViewClients = (ListView) findViewById(R.id.listViewClients);
+
+        ArrayAdapter clientsAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                clientsNames.toArray(new String[]{}));
+
+        listViewClients.setAdapter(clientsAdapter);
+
+
+
     }
 
-    public void click() {
 
-
-    }
 
 }
