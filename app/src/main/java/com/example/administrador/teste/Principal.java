@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Principal extends AppCompatActivity {
 
@@ -23,25 +24,31 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        ArrayList<String> clientsNames = new ArrayList<>();
-
-        clientsNames.add("Testildo");
-        clientsNames.add("Testario");
-        clientsNames.add("Testaria");
-        clientsNames.add("Testin");
+        List<Client> clientsNames = getClients();
 
         ListView listViewClients = (ListView) findViewById(R.id.listViewClients);
 
-        ArrayAdapter clientsAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                clientsNames.toArray(new String[]{}));
+        ClientListAdapter clientsAdapter = new ClientListAdapter(Principal.this, clientsNames );
 
         listViewClients.setAdapter(clientsAdapter);
-
-
-
     }
 
+    private List<Client> getClients() {
+        List<Client> clients = new ArrayList<>();
+
+        Client renam = new Client();
+        renam.setName("Renam");
+        renam.setAge(22);
+
+        Client luiz = new Client();
+        luiz.setName("Luiz");
+        luiz.setAge(22);
+
+        clients.add(renam);
+        clients.add(luiz);
+
+        return clients;
+    }
 
 
 }
