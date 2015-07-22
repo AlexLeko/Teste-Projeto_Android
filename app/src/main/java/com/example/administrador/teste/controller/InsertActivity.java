@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.administrador.teste.R;
 import com.example.administrador.teste.model.entities.Client;
+import com.example.administrador.teste.util.FormHelper;
 
 
 /**
@@ -40,12 +41,15 @@ public class InsertActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // VALIDAÇÃO DO FORMULARIO.
         if(item.getItemId() == R.id.menu_save){
             Client client = bindClient();
-            client.save();
 
-            Toast.makeText(InsertActivity.this, Client.getAll().toString(), Toast.LENGTH_LONG).show();
-            finish();
+            if(FormHelper.requiredValidate(InsertActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
+                client.save();
+                Toast.makeText(InsertActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+                finish();
+            }
         }
 
         return super.onOptionsItemSelected(item);

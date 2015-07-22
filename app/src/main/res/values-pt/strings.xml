@@ -12,4 +12,6 @@
     <string name="phone">Telefone</string>
     <string name="address">Endereço</string>
     <string name="save">Salvar</string>
+    <string name="required_field">Campo Obrigatório!</string>
+    <string name="success">Sucesso !</string>
 </resources>

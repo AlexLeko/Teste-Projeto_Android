@@ -11,4 +11,5 @@
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="save">Save</string>
+    <string name="required_field">Required Field!</string>
 </resources>

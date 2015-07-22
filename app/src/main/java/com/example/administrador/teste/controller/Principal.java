@@ -17,14 +17,25 @@ import java.util.List;
 
 public class Principal extends AppCompatActivity {
 
+    ListView listViewClients;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        ListView listViewClients = (ListView) findViewById(R.id.listViewClients);
+        // CHAMA A LISTA DO ADAPTER.
+        listViewClients = (ListView) findViewById(R.id.listViewClients);
         ClientListAdapter clientsAdapter = new ClientListAdapter(Principal.this, Client.getAll());
         listViewClients.setAdapter(clientsAdapter);
+    }
+
+    @Override
+    protected void onResume() {     // ATUALIZAR A LISTA  DE CLIENTES.
+        super.onResume();
+        ClientListAdapter adapter = (ClientListAdapter) listViewClients.getAdapter();
+        adapter.setClients(Client.getAll());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
