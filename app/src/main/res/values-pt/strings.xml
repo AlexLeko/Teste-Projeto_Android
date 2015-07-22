@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leko APP01</string>
+
+    <string name="action_settings">Configuração</string>
+
+    <string name="login">Login</string>
+    <string name="userName">Usuario</string>
+    <string name="password">Senha</string>
+    <string name="name">Nome</string>
+    <string name="age">Idade</string>
+    <string name="phone">Telefone</string>
+    <string name="address">Endereço</string>
+    <string name="save">Salvar</string>
+</resources>

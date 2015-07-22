@@ -1,12 +1,13 @@
-package com.example.administrador.teste;
+package com.example.administrador.teste.controller;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.administrador.teste.model.entities.Client;
+import com.example.administrador.teste.R;
 
 import java.util.List;
 
