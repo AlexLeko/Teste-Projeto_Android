@@ -74,4 +74,6 @@ public class Client {
         return MemoryClientRepository.getInstance().getAll();
     }
 
+
+
 }
