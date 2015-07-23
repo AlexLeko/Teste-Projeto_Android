@@ -85,7 +85,7 @@ public class ClientListActivity extends AppCompatActivity {
             Intent intent = new Intent(ClientListActivity.this, ClientPersistentActivity.class);
             intent.putExtra(ClientPersistentActivity.CLIENT_PARAM, (Parcelable) client);
             startActivity(intent);
-        }else if(item.getItemId() == R.id.menuDelete){ 
+        }else if(item.getItemId() == R.id.menuDelete){
             client.delete();
             refreshClientList();
             Toast.makeText(ClientListActivity.this, R.string.success, Toast.LENGTH_LONG).show();
