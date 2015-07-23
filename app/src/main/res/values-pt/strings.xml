@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Leko APP01</string>
+    <string name="app_name">Leko APP-1</string>
 
     <string name="action_settings">Configuração</string>
 
@@ -14,4 +14,6 @@
     <string name="save">Salvar</string>
     <string name="required_field">Campo Obrigatório!</string>
     <string name="success">Sucesso !</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
 </resources>

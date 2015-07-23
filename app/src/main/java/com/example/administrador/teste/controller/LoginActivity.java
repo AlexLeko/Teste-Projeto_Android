@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent goToPrincipal = new Intent(LoginActivity.this, Principal.class);
+                Intent goToPrincipal = new Intent(LoginActivity.this, ClientListActivity.class);
                 startActivity(goToPrincipal);
             }
         });

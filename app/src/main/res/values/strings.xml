@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Leko APP01</string>
+    <string name="app_name">Leko APP-1</string>
 
     <string name="action_settings">Settings</string>
 
@@ -12,4 +12,6 @@
     <string name="address">Address</string>
     <string name="save">Save</string>
     <string name="required_field">Required Field!</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

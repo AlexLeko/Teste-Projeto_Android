@@ -1,6 +1,8 @@
 package com.example.administrador.teste.controller;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +17,11 @@ import com.example.administrador.teste.util.FormHelper;
 /**
  * Created by Administrador on 21/07/2015.
  */
-public class InsertActivity extends AppCompatActivity{
+public class ClientPersistentActivity extends AppCompatActivity{
+
+    public static String CLIENT_PARAM = "CLIENT_PARAM";
+    private Client client;
+
 
     private EditText editTextName;
     private EditText editTextAge;
@@ -31,6 +37,16 @@ public class InsertActivity extends AppCompatActivity{
         editTextAge = (EditText) findViewById(R.id.editTextAge);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
+
+        // pega o client que foi serializado no EDIT.
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            client = (Client) extras.getParcelable(CLIENT_PARAM);
+            if(client == null){
+                throw new IllegalArgumentException();
+            }
+            bindForm(client);
+        }
     }
 
     @Override
@@ -41,13 +57,13 @@ public class InsertActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // VALIDAÇÃO DO FORMULARIO.
+        // VALIDACAO DO FORMULARIO.
         if(item.getItemId() == R.id.menu_save){
             Client client = bindClient();
 
-            if(FormHelper.requiredValidate(InsertActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
+            if(FormHelper.requiredValidate(ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
                 client.save();
-                Toast.makeText(InsertActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+                Toast.makeText(ClientPersistentActivity.this, R.string.success, Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -62,6 +78,13 @@ public class InsertActivity extends AppCompatActivity{
         client.setAddress(editTextAddress.getText().toString());
         client.setPhone(editTextPhone.getText().toString());
         return client;
+    }
+
+    private void bindForm(Client client){                // RECUPERA O CLIENTE PARA EDITAR.
+        editTextName.setText(client.getName());
+        editTextAge.setText(client.getAge().toString());
+        editTextPhone.setText(client.getPhone());
+        editTextAddress.setText(client.getAddress());
     }
 
 
