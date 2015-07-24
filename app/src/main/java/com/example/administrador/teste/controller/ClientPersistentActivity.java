@@ -44,7 +44,7 @@ public class ClientPersistentActivity extends AppCompatActivity{
             if(client == null){
                 throw new IllegalArgumentException();
             }
-            bindForm(client);
+            bindForm();
         }
     }
 
@@ -83,7 +83,7 @@ public class ClientPersistentActivity extends AppCompatActivity{
         return client;
     }
 
-    private void bindForm(Client client){                // RECUPERA O CLIENTE PARA EDITAR.
+    private void bindForm(){                // RECUPERA O CLIENTE PARA EDITAR.
         editTextName.setText(client.getName());
         editTextAge.setText(client.getAge().toString());
         editTextPhone.setText(client.getPhone());

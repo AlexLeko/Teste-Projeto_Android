@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * Created by Administrador on 20/07/2015.
  */
-public class Client implements Serializable, Parcelable{
-
+public class Client implements Serializable, Parcelable {
 
 
     private Integer id;
@@ -23,11 +22,11 @@ public class Client implements Serializable, Parcelable{
     private String address;
 
     // CONSTRUTOR DO PARCELABLE.
-    public Client(){
+    public Client() {
         super();
     }
 
-    public Client(Parcel in){
+    public Client(Parcel in) {
         super();
         readToParcel(in);
     }
@@ -35,30 +34,39 @@ public class Client implements Serializable, Parcelable{
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getAddress() {
         return address;
     }
+
     public String getName() {
         return name;
     }
+
     public Integer getAge() {
         return age;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setAge(Integer age) {
         this.age = age;
     }
+
     public String getPhone() {
         return phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -88,15 +96,15 @@ public class Client implements Serializable, Parcelable{
         return result;
     }
 
-    public void save(){
+    public void save() {
         SQLiteClientRepository.getInstance().save(this);    // salva ele mesmo.
     }
 
-    public static List<Client> getAll(){
+    public static List<Client> getAll() {
         return SQLiteClientRepository.getInstance().getAll();
     }
 
-    public void delete(){
+    public void delete() {
         SQLiteClientRepository.getInstance().delete(this);
     }
 
@@ -116,22 +124,22 @@ public class Client implements Serializable, Parcelable{
     }
 
     public void readToParcel(Parcel in) {
-            int partialId = in.readInt();
-            age = partialId == -1 ? null : partialId;
+        int partialId = in.readInt();
+        id = partialId == -1 ? null : partialId;
         name = in.readString();
-            int partialAge = in.readInt();
-            age = partialAge == -1 ? null : partialAge;
+        int partialAge = in.readInt();
+        age = partialAge == -1 ? null : partialAge;
         phone = in.readString();
         address = in.readString();
     }
 
-    public static final Parcelable.Creator<Client> CREATOR = new Parcelable.Creator<Client>(){
+    public static final Parcelable.Creator<Client> CREATOR = new Parcelable.Creator<Client>() {
 
-        public Client createFromParcel(Parcel source){
+        public Client createFromParcel(Parcel source) {
             return new Client(source);
         }
 
-        public Client[] newArray(int size){
+        public Client[] newArray(int size) {
             return new Client[size];
         }
     };
