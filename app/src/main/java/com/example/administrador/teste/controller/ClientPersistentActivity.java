@@ -22,7 +22,6 @@ public class ClientPersistentActivity extends AppCompatActivity{
     public static String CLIENT_PARAM = "CLIENT_PARAM";
     private Client client;
 
-
     private EditText editTextName;
     private EditText editTextAge;
     private EditText editTextPhone;
@@ -50,17 +49,17 @@ public class ClientPersistentActivity extends AppCompatActivity{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {             // CLIQUE SIMPLES DO MENU.
         getMenuInflater().inflate(R.menu.menu_client_persist, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // VALIDACAO DO FORMULARIO.
+    public boolean onOptionsItemSelected(MenuItem item) {           // AÇÃO DO BOTÃO SALVAR.
         if(item.getItemId() == R.id.menu_save){
             Client client = bindClient();
 
+            // VALIDACAO DO FORMULARIO.
             if(FormHelper.requiredValidate(ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
                 client.save();
                 Toast.makeText(ClientPersistentActivity.this, R.string.success, Toast.LENGTH_LONG).show();
@@ -72,11 +71,15 @@ public class ClientPersistentActivity extends AppCompatActivity{
     }
 
     private Client bindClient(){                // RECUPERA O CLIENTE DA TELA.
-        Client client = new Client();
+        if(client == null) {
+            client = new Client();
+        }
+
         client.setName(editTextName.getText().toString());
-        client.setAge(Integer.valueOf(editTextAge.getText().toString()) );
+        client.setAge(Integer.valueOf(editTextAge.getText().toString()));
         client.setAddress(editTextAddress.getText().toString());
         client.setPhone(editTextPhone.getText().toString());
+
         return client;
     }
 

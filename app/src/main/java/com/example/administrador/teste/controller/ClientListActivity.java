@@ -1,5 +1,7 @@
 package com.example.administrador.teste.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,7 +26,7 @@ public class ClientListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        bindClientList();
+        bindClientList();   // CHAMA A LISTA DE CLIENTES.
     }
 
     private void bindClientList() {
@@ -33,6 +35,7 @@ public class ClientListActivity extends AppCompatActivity {
         ClientListAdapter clientsAdapter = new ClientListAdapter(ClientListActivity.this, Client.getAll());
         listViewClients.setAdapter(clientsAdapter);
 
+        // CLIQUE LONGO NA TELA.
         listViewClients.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,9 +89,23 @@ public class ClientListActivity extends AppCompatActivity {
             intent.putExtra(ClientPersistentActivity.CLIENT_PARAM, (Parcelable) client);
             startActivity(intent);
         }else if(item.getItemId() == R.id.menuDelete){
-            client.delete();
-            refreshClientList();
-            Toast.makeText(ClientListActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(ClientListActivity.this)
+                .setMessage(R.string.ConfirmDelete)
+                .setTitle(R.string.confirm)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        client.delete();
+                        refreshClientList();
+                        Toast.makeText(ClientListActivity.this, R.string.success, Toast.LENGTH_LONG);
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+            })
+            .create()
+            .show();
         }
 
         return super.onContextItemSelected(item);
