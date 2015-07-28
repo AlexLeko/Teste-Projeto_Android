@@ -8,9 +8,6 @@ import com.example.administrador.teste.model.entities.Client;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrador on 23/07/2015.
- */
 public class ClientContract  {
 
     public static final String TABLE = "client";
@@ -37,7 +34,7 @@ public class ClientContract  {
         return sql.toString();
     }
 
-    public static ContentValues getContentValues(Client client){
+    public static ContentValues getContentValues(Client client){        // Recupera os Valores do Cliente.
         ContentValues values = new ContentValues();
 
         values.put(ClientContract.ID, client.getId());
@@ -49,7 +46,7 @@ public class ClientContract  {
         return values;
     }
 
-    public static Client bindCursor(Cursor cursor){
+    public static Client bindCursor(Cursor cursor){                 // Recupera a Listagem.
         if(!cursor.isBeforeFirst() || cursor.moveToNext() ){
             Client client = new Client();
 

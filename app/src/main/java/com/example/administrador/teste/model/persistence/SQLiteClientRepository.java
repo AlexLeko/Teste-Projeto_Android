@@ -20,7 +20,7 @@ public class SQLiteClientRepository implements ClientRepository {
     // SINGLETON
     private static SQLiteClientRepository singletonInstance;    // instancia unica do objeto.
 
-    private SQLiteClientRepository(){       // construtor que bloqueia mais de uma instanciação.
+    private SQLiteClientRepository(){       // construtor que bloqueia mais de uma instanciaï¿½ï¿½o.
         super();
     }
 
@@ -54,8 +54,6 @@ public class SQLiteClientRepository implements ClientRepository {
 
     @Override
     public List<Client> getAll() {
-
-        //List<Client> clients = new ArrayList<>();
 
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getReadableDatabase();

@@ -20,7 +20,7 @@ public class MemoryClientRepository implements ClientRepository {
     }
 
     public static ClientRepository getInstance() {
-        if(MemoryClientRepository.singletonInstance == null){
+        if(MemoryClientRepository.singletonInstance == null){           // Verifica: SAVE / EDIT
             MemoryClientRepository.singletonInstance = new MemoryClientRepository();
         }
         return MemoryClientRepository.singletonInstance;

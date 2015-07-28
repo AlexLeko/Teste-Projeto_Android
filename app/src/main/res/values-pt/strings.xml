@@ -16,4 +16,11 @@
     <string name="success">Sucesso !</string>
     <string name="edit">Editar</string>
     <string name="delete">Excluir</string>
+
+    <string name="ConfirmDelete">Confirmar Exclusão</string>
+    <string name="confirm">Confirmar</string>
+    <string name="yes">Sim</string>
+    <string name="cancel">Cancelar</string>
+    <string name="no">Não</string>
+    <string name="cep">Cep</string>
 </resources>

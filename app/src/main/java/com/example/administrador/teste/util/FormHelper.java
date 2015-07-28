@@ -17,8 +17,9 @@ public final class FormHelper {
 
     public static boolean requiredValidate(Context context, EditText... editTexts){
         // FAZ A VERIFICAÇÃO SE TODOS OS CAMPOS(PARAMETROS) FORAM PREENCHIDOS.
-        boolean valid = true;
 
+        // VALIDAÇÃO.
+        boolean valid = true;
         for(EditText editText : editTexts){
             String value = editText.getText() == null ? null : editText.getText().toString();
 

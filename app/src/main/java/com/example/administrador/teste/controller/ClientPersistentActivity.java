@@ -1,22 +1,23 @@
 package com.example.administrador.teste.controller;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.administrador.teste.R;
 import com.example.administrador.teste.model.entities.Client;
+import com.example.administrador.teste.model.entities.ClientAddress;
+import com.example.administrador.teste.model.services.CepService;
 import com.example.administrador.teste.util.FormHelper;
 
-
-/**
- * Created by Administrador on 21/07/2015.
- */
 public class ClientPersistentActivity extends AppCompatActivity{
 
     public static String CLIENT_PARAM = "CLIENT_PARAM";
@@ -26,16 +27,15 @@ public class ClientPersistentActivity extends AppCompatActivity{
     private EditText editTextAge;
     private EditText editTextPhone;
     private EditText editTextAddress;
+    private EditText editTextCep;
+    private Button buttonFindCep;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
 
-        editTextName = (EditText) findViewById(R.id.editTextename);
-        editTextAge = (EditText) findViewById(R.id.editTextAge);
-        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-        editTextPhone = (EditText) findViewById(R.id.editTextPhone);
+        bindFields();
 
         // pega o client que foi serializado no EDIT.
         Bundle extras = getIntent().getExtras();
@@ -48,6 +48,27 @@ public class ClientPersistentActivity extends AppCompatActivity{
         }
     }
 
+    private void bindFields(){
+        editTextName = (EditText) findViewById(R.id.editTextename);
+        editTextAge = (EditText) findViewById(R.id.editTextAge);
+        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
+        editTextPhone = (EditText) findViewById(R.id.editTextPhone);
+        editTextCep = (EditText) findViewById(R.id.editTextCep);
+        buttonFindCep = (Button) findViewById(R.id.buttonFindCep);
+
+        bindButtonFindCep();
+    }
+
+    private void bindButtonFindCep() {              // BOTÃƒO PARA BUSCAR O CEP.
+        buttonFindCep = (Button) findViewById(R.id.buttonFindCep);
+        buttonFindCep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new getAddressByCep().execute(editTextCep.getText().toString());
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {             // CLIQUE SIMPLES DO MENU.
         getMenuInflater().inflate(R.menu.menu_client_persist, menu);
@@ -55,7 +76,7 @@ public class ClientPersistentActivity extends AppCompatActivity{
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {           // AÇÃO DO BOTÃO SALVAR.
+    public boolean onOptionsItemSelected(MenuItem item) {           // Aï¿½ï¿½O DO BOTï¿½O SALVAR.
         if(item.getItemId() == R.id.menu_save){
             Client client = bindClient();
 
@@ -88,6 +109,24 @@ public class ClientPersistentActivity extends AppCompatActivity{
         editTextAge.setText(client.getAge().toString());
         editTextPhone.setText(client.getPhone());
         editTextAddress.setText(client.getAddress());
+    }
+
+    private class getAddressByCep extends AsyncTask<String, Void, ClientAddress> {
+
+        //@Override
+       // protected void onPreExecute() {     // EXECUTA ANTES DA EXECUÃ‡ÃƒO
+       //     super.onPreExecute();
+        //}
+
+        @Override
+        protected ClientAddress doInBackground(String... params) {
+            return CepService.getAddressBy(params[0]);
+        }
+
+        //@Override
+       // protected void onPostExecute(Void aVoid) {      // EXECUTA APOS A EXECUÃ‡ÃƒO
+         //   super.onPostExecute(aVoid);
+        //}
     }
 
 
