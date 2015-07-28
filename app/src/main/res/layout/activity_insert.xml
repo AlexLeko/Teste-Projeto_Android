@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,5 +55,41 @@
         android:layout_height="wrap_content"
         android:text="@string/find" />
 
+    <EditText
+        android:id="@+id/editTextStreetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/streetType"
+        android:paddingBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/street"
+        android:paddingBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextneighborhood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/neighborhood"
+        android:paddingBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/city"
+        android:paddingBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/state"
+        android:paddingBottom="10dp"/>
+
 
 </LinearLayout>
+</ScrollView>

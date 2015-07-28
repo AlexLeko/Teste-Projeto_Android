@@ -19,7 +19,13 @@ public class Client implements Serializable, Parcelable {
     private String name;
     private Integer age;
     private String phone;
+    private String cep;
     private String address;
+    private String streetType;
+    private String street;
+    private String neighborhood;
+    private String city;
+    private String state;
 
     // CONSTRUTOR DO PARCELABLE.
     public Client() {
@@ -29,6 +35,96 @@ public class Client implements Serializable, Parcelable {
     public Client(Parcel in) {
         super();
         readToParcel(in);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Client client = (Client) o;
+
+        if (id != null ? !id.equals(client.id) : client.id != null) return false;
+        if (name != null ? !name.equals(client.name) : client.name != null) return false;
+        if (age != null ? !age.equals(client.age) : client.age != null) return false;
+        if (phone != null ? !phone.equals(client.phone) : client.phone != null) return false;
+        if (cep != null ? !cep.equals(client.cep) : client.cep != null) return false;
+        if (address != null ? !address.equals(client.address) : client.address != null)
+            return false;
+        if (streetType != null ? !streetType.equals(client.streetType) : client.streetType != null)
+            return false;
+        if (street != null ? !street.equals(client.street) : client.street != null) return false;
+        if (neighborhood != null ? !neighborhood.equals(client.neighborhood) : client.neighborhood != null)
+            return false;
+        if (city != null ? !city.equals(client.city) : client.city != null) return false;
+        return !(state != null ? !state.equals(client.state) : client.state != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (cep != null ? cep.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (streetType != null ? streetType.hashCode() : 0);
+        result = 31 * result + (street != null ? street.hashCode() : 0);
+        result = 31 * result + (neighborhood != null ? neighborhood.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        return result;
+    }
+
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getStreetType() {
+        return streetType;
+    }
+
+    public void setStreetType(String streetType) {
+        this.streetType = streetType;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Integer getId() {
@@ -71,31 +167,6 @@ public class Client implements Serializable, Parcelable {
         this.phone = phone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Client client = (Client) o;
-
-        if (id != null ? !id.equals(client.id) : client.id != null) return false;
-        if (name != null ? !name.equals(client.name) : client.name != null) return false;
-        if (age != null ? !age.equals(client.age) : client.age != null) return false;
-        if (phone != null ? !phone.equals(client.phone) : client.phone != null) return false;
-        return !(address != null ? !address.equals(client.address) : client.address != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        return result;
-    }
-
     public void save() {
         SQLiteClientRepository.getInstance().save(this);    // salva ele mesmo.
     }
@@ -121,6 +192,13 @@ public class Client implements Serializable, Parcelable {
         dest.writeInt(age == null ? -1 : age);
         dest.writeString(phone == null ? "" : phone);
         dest.writeString(address == null ? "" : address);
+        // CEP
+        dest.writeString(cep == null ? "" : cep);
+        dest.writeString(streetType == null ? "" : streetType);
+        dest.writeString(street == null ? "" : street);
+        dest.writeString(neighborhood == null ? "" : neighborhood);
+        dest.writeString(city == null ? "" : city);
+        dest.writeString(state == null ? "" : state);
     }
 
     public void readToParcel(Parcel in) {
@@ -131,6 +209,12 @@ public class Client implements Serializable, Parcelable {
         age = partialAge == -1 ? null : partialAge;
         phone = in.readString();
         address = in.readString();
+        cep = in.readString();
+        streetType = in.readString();
+        street = in.readString();
+        neighborhood = in.readString();
+        city = in.readString();
+        state = in.readString();
     }
 
     public static final Parcelable.Creator<Client> CREATOR = new Parcelable.Creator<Client>() {

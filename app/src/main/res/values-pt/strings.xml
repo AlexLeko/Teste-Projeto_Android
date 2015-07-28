@@ -4,23 +4,29 @@
 
     <string name="action_settings">Configuração</string>
 
-    <string name="login">Login</string>
+    <string name="login">Entrar</string>
     <string name="userName">Usuario</string>
     <string name="password">Senha</string>
     <string name="name">Nome</string>
     <string name="age">Idade</string>
-    <string name="phone">Telefone</string>
+    <string name="phone">Fone</string>
     <string name="address">Endereço</string>
     <string name="save">Salvar</string>
-    <string name="required_field">Campo Obrigatório!</string>
-    <string name="success">Sucesso !</string>
+    <string name="sucess">Sucesso ! ! !</string>
+    <string name="required_field">Campo Obrigatório</string>
     <string name="edit">Editar</string>
     <string name="delete">Excluir</string>
-
-    <string name="ConfirmDelete">Confirmar Exclusão</string>
+    <string name="ConfirmDelete">Confirmar a Exclusão</string>
     <string name="confirm">Confirmar</string>
     <string name="yes">Sim</string>
     <string name="cancel">Cancelar</string>
     <string name="no">Não</string>
     <string name="cep">Cep</string>
+    <string name="find">Buscar</string>
+    <string name="street">Rua</string>
+    <string name="streetType">Tipo de Rua</string>
+    <string name="neighborhood">Bairro</string>
+    <string name="city">Cidade</string>
+    <string name="state">Estado</string>
+    <string name="loading">Carregando...</string>
 </resources>

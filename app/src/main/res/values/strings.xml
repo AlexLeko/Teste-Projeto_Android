@@ -21,4 +21,11 @@
     <string name="no">No</string>
     <string name="cep">Cep</string>
     <string name="find">Find</string>
+    <string name="street">Street</string>
+    <string name="streetType">Type Street</string>
+    <string name="neighborhood">Neighborhood</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="loading">Loading</string>
+    <string name="success">Sucess</string>
 </resources>

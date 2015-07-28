@@ -12,9 +12,6 @@ import java.util.List;
 
 import static com.example.administrador.teste.model.persistence.ClientContract.getContentValues;
 
-/**
- * Created by Administrador on 23/07/2015.
- */
 public class SQLiteClientRepository implements ClientRepository {
 
     // SINGLETON

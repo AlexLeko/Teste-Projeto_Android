@@ -1,5 +1,7 @@
 package com.example.administrador.teste.controller;
 
+import android.app.ProgressDialog;
+import android.location.Address;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -18,6 +20,9 @@ import com.example.administrador.teste.model.entities.ClientAddress;
 import com.example.administrador.teste.model.services.CepService;
 import com.example.administrador.teste.util.FormHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientPersistentActivity extends AppCompatActivity{
 
     public static String CLIENT_PARAM = "CLIENT_PARAM";
@@ -29,6 +34,11 @@ public class ClientPersistentActivity extends AppCompatActivity{
     private EditText editTextAddress;
     private EditText editTextCep;
     private Button buttonFindCep;
+    private EditText editTextStreetType;
+    private EditText editTextStreet;
+    private EditText editTextNeighborhood;
+    private EditText editTextCity;
+    private EditText editTextState;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,12 @@ public class ClientPersistentActivity extends AppCompatActivity{
         editTextCep = (EditText) findViewById(R.id.editTextCep);
         buttonFindCep = (Button) findViewById(R.id.buttonFindCep);
 
+        editTextStreetType = (EditText) findViewById(R.id.editTextStreetType);
+        editTextStreet = (EditText) findViewById(R.id.editTextStreet);
+        editTextNeighborhood = (EditText) findViewById(R.id.editTextneighborhood);
+        editTextCity = (EditText) findViewById(R.id.editTextCity);
+        editTextState = (EditText) findViewById(R.id.editTextState);
+
         bindButtonFindCep();
     }
 
@@ -81,8 +97,10 @@ public class ClientPersistentActivity extends AppCompatActivity{
             Client client = bindClient();
 
             // VALIDACAO DO FORMULARIO.
-            if(FormHelper.requiredValidate(ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
+            if(FormHelper.requiredValidate(
+                    ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
                 client.save();
+
                 Toast.makeText(ClientPersistentActivity.this, R.string.success, Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -101,6 +119,13 @@ public class ClientPersistentActivity extends AppCompatActivity{
         client.setAddress(editTextAddress.getText().toString());
         client.setPhone(editTextPhone.getText().toString());
 
+        client.setCep(editTextCep.getText().toString());
+        client.setStreetType(editTextStreetType.getText().toString());
+        client.setStreet(editTextStreet.getText().toString());
+        client.setNeighborhood(editTextNeighborhood.getText().toString());
+        client.setCity(editTextCity.getText().toString());
+        client.setState(editTextState.getText().toString());
+
         return client;
     }
 
@@ -109,24 +134,43 @@ public class ClientPersistentActivity extends AppCompatActivity{
         editTextAge.setText(client.getAge().toString());
         editTextPhone.setText(client.getPhone());
         editTextAddress.setText(client.getAddress());
+
+        editTextCep.setText(client.getCep());
+        editTextStreetType.setText(client.getStreetType());
+        editTextStreet.setText(client.getStreet());
+        editTextNeighborhood.setText(client.getNeighborhood());
+        editTextCity.setText(client.getCity());
+        editTextState.setText(client.getState());
     }
 
     private class getAddressByCep extends AsyncTask<String, Void, ClientAddress> {
 
-        //@Override
-       // protected void onPreExecute() {     // EXECUTA ANTES DA EXECUÇÃO
-       //     super.onPreExecute();
-        //}
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {     // EXECUTA ANTES DA EXECUÇÃO
+            progressDialog = new ProgressDialog(ClientPersistentActivity.this);     // CARREGANDO...
+            progressDialog.setMessage(getString(R.string.loading));
+            progressDialog.show();
+        }
 
         @Override
         protected ClientAddress doInBackground(String... params) {
             return CepService.getAddressBy(params[0]);
         }
 
-        //@Override
-       // protected void onPostExecute(Void aVoid) {      // EXECUTA APOS A EXECUÇÃO
-         //   super.onPostExecute(aVoid);
-        //}
+        @Override
+        protected void onPostExecute(ClientAddress address) {      // EXECUTA APOS A EXECUÇÃO
+            editTextStreetType.setText(address.getTipoDeLogradouro().toString());
+            editTextStreet.setText(address.getLogradouro().toString());
+            editTextNeighborhood.setText(address.getBairro().toString());
+            editTextCity.setText(address.getCidade().toString());
+            editTextState.setText(address.getEstado().toString());
+
+            progressDialog.dismiss();
+        }
+
+
     }
 
 
