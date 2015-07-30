@@ -3,6 +3,7 @@ package com.example.administrador.teste.controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,17 +17,34 @@ import android.widget.Toast;
 
 import com.example.administrador.teste.model.entities.Client;
 import com.example.administrador.teste.R;
+import com.melnykov.fab.FloatingActionButton;
+
+import org.apache.http.protocol.HTTP;
 
 public class ClientListActivity extends AppCompatActivity {
 
     private ListView listViewClients;
     private Client client;
+    private FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        bindClientList();   // CHAMA A LISTA DE CLIENTES.
+        bindClientList();   // CHAMA A LISTA DE CLIENTES E SUAS FUNCIONALIDADES.
+
+        bindFab();
+    }
+
+    private void bindFab() {            // CONFIGURAÇÃO DO BOTÃO INFERIOR DE ADD.
+        fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToMainPrincipal = new Intent(ClientListActivity.this, ClientPersistentActivity.class);
+                startActivity(goToMainPrincipal);
+            }
+        });
     }
 
     private void bindClientList() {
@@ -42,6 +60,18 @@ public class ClientListActivity extends AppCompatActivity {
                 client = (Client) parent.getItemAtPosition(position);
 
                 return false;
+            }
+        });
+
+        // FAZER LIGAÇÃO DIRETO PELO CAMPO DA LISTAGEM. >>> Intent.ACTION_call => LIGA DIRETO.
+        listViewClients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Client client = (Client) parent.getItemAtPosition(position);
+                // Best Practices: http://stackoverflow.com/questions/4275678/how-to-make-phone-call-using-intent-in-android
+                final Intent goToSOPhoneCall = new Intent(Intent.ACTION_DIAL /* or Intent.ACTION_DIAL (no manifest permission needed) */);
+                goToSOPhoneCall.setData(Uri.parse("tel:" + client.getPhone()));
+                startActivity(goToSOPhoneCall);
             }
         });
 
@@ -70,8 +100,19 @@ public class ClientListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {       // AÇÃO DO MENU => CADASTRAR.
         if (item.getItemId() == R.id.menu_add) {
-            Intent goToInsertClient = new Intent(ClientListActivity.this, ClientPersistentActivity.class);
-            startActivity(goToInsertClient);
+            // CRIA AS OPÇÕES DE AÇÕES NO MENU.
+            final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Seu texto aqui...");
+            sendIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+
+            // Create intent to show the chooser dialog
+            final Intent chooser = Intent.createChooser(sendIntent, "Titulo Chooser");
+
+            // Verify the original intent will resolve to at least one activity
+            if (sendIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(chooser);
+            }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

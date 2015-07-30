@@ -10,44 +10,64 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextename"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextAge"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/age"
-        android:inputType="number"
-        android:maxLength="2"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/age"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextPhone"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/phone"
-        android:inputType="phone"
-        android:maxLength="12"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextAddress"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/address"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextCep"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/cep"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextCep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cep"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     <Button
         android:id="@+id/buttonFindCep"
@@ -55,41 +75,60 @@
         android:layout_height="wrap_content"
         android:text="@string/find" />
 
-    <EditText
-        android:id="@+id/editTextStreetType"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/streetType"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextStreetType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/streetType"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextStreet"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/street"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextStreet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/street"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextneighborhood"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/neighborhood"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextneighborhood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/neighborhood"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextCity"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/city"
-        android:paddingBottom="10dp"/>
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <EditText
-        android:id="@+id/editTextState"
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/state"
-        android:paddingBottom="10dp"/>
-
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editTextState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/state"
+            android:paddingBottom="10dp"/>
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
 </LinearLayout>
 </ScrollView>
