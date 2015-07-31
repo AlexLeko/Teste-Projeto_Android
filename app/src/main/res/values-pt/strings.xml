@@ -29,4 +29,6 @@
     <string name="city">Cidade</string>
     <string name="state">Estado</string>
     <string name="loading">Carregando...</string>
+    <string name="loginFail">Login Falhou !</string>
+    <string name="InvalidAge">Idade Obrigatória! </string>
 </resources>

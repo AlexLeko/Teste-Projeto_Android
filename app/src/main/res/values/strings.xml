@@ -28,4 +28,6 @@
     <string name="state">State</string>
     <string name="loading">Loading</string>
     <string name="success">Sucess</string>
+    <string name="loginFail">Login Fail</string>
+    <string name="InvalidAge">Invalid Age</string>
 </resources>

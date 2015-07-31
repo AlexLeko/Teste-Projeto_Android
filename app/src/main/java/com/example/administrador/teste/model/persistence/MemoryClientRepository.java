@@ -14,7 +14,7 @@ public class MemoryClientRepository implements ClientRepository {
 
     private List<Client> clients;
 
-    private MemoryClientRepository(){       // construtor que bloqueia mais de uma instanciação.
+    private MemoryClientRepository(){       // construtor que bloqueia mais de uma instanciacao.
         super();
         clients = new ArrayList<>();
     }

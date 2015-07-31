@@ -22,7 +22,7 @@ public final class CepService {
 
         ClientAddress address = null;
 
-        // CLIANDO UMA COMUNICAÇÃO REST - JSON
+        // CLIANDO UMA COMUNICACAO REST - JSON
         try {
             // SCOPO DA CONEXAO COM A API.
             URL url = new URL(URL + cep);
@@ -36,13 +36,13 @@ public final class CepService {
                 throw new RuntimeException("Error code: " +responseCode);
             }
 
-            InputStream inputStream = conn.getInputStream();    // pega o body da requisição.
+            InputStream inputStream = conn.getInputStream();    // pega o body da requisicao.
 
-            // FAZ A REQUISIÇÃO COM O JACKSON.
+            // FAZ A REQUISICAO COM O JACKSON.
             ObjectMapper objectMapper = new ObjectMapper();
             address = objectMapper.readValue(inputStream, ClientAddress.class);
 
-            conn.disconnect();  // disconecta do servidor. Quando não é Stateless
+            conn.disconnect();  // disconecta do servidor. Quando nao e Stateless
 
         } catch (IOException e ) {
             e.printStackTrace();

@@ -40,7 +40,6 @@ public class ClientPersistentActivity extends AppCompatActivity{
     private EditText editTextPhone;
     private EditText editTextAddress;
     private EditText editTextCep;
-    private Button buttonFindCep;
     private EditText editTextStreetType;
     private EditText editTextStreet;
     private EditText editTextNeighborhood;
@@ -92,17 +91,34 @@ public class ClientPersistentActivity extends AppCompatActivity{
         editTextAge = (EditText) findViewById(R.id.editTextAge);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
+
         editTextCep = (EditText) findViewById(R.id.editTextCep);
-        buttonFindCep = (Button) findViewById(R.id.buttonFindCep);
+        editTextCep.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_cep2, 0); // COLOCA O ICONE EM UMA POSIÇÃO ESPECIFICA. ESQ-TOP-DIR-BAIXO
+        editTextCep.setOnTouchListener(new View.OnTouchListener() {    // EVENTOS DE CLIQUE.
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                // MAPEAMENTO DA IMAGEM PARA TOQUE DE LINK.
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextCep.getRight() - editTextCep.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        new getAddressByCep().execute(editTextCep.getText().toString());
+                    }
+                }
+                return false;
+            }
+        });
 
         editTextStreetType = (EditText) findViewById(R.id.editTextStreetType);
         editTextStreet = (EditText) findViewById(R.id.editTextStreet);
         editTextNeighborhood = (EditText) findViewById(R.id.editTextneighborhood);
         editTextCity = (EditText) findViewById(R.id.editTextCity);
         editTextState = (EditText) findViewById(R.id.editTextState);
-
-        bindButtonFindCep();
     }
+
 
     /**
      * @see <a href="http://developer.android.com/training/basics/intents/result.html">Getting a Result from an Activity</a>
@@ -132,15 +148,6 @@ public class ClientPersistentActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void bindButtonFindCep() {              // BOTÃO PARA BUSCAR O CEP.
-        buttonFindCep = (Button) findViewById(R.id.buttonFindCep);
-        buttonFindCep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new getAddressByCep().execute(editTextCep.getText().toString());
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {             // CLIQUE SIMPLES DO MENU.
@@ -151,15 +158,23 @@ public class ClientPersistentActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {           // A��O DO BOT�O SALVAR.
         if(item.getItemId() == R.id.menu_save){
-            Client client = bindClient();
 
             // VALIDACAO DO FORMULARIO.
             if(FormHelper.requiredValidate(
-                    ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress, editTextPhone)){
-                client.save();
+                    ClientPersistentActivity.this, editTextName, editTextAge, editTextAddress,
+                    editTextCep, editTextPhone, editTextStreetType, editTextStreet,
+                    editTextNeighborhood, editTextCity, editTextState)){
 
-                Toast.makeText(ClientPersistentActivity.this, R.string.success, Toast.LENGTH_LONG).show();
-                finish();
+                Client client = bindClient();
+
+                if (! (editTextAge.getText() == null || editTextAge.getText().toString().equals(""))){
+                    client.save();
+                    Toast.makeText(ClientPersistentActivity.this, R.string.success, Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                else{
+                    Toast.makeText(ClientPersistentActivity.this, R.string.InvalidAge, Toast.LENGTH_LONG).show();
+                }
             }
         }
 
